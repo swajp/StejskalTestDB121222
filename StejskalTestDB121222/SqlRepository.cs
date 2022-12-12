@@ -49,5 +49,20 @@ namespace StejskalTestDB121222
             }
             return employees;
         }
+        public void RemoveEmployees(int sectectedrow)
+        {
+                using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+                {
+                    sqlConnection.Open();
+                    using (SqlCommand sqlCommand = new SqlCommand())
+                    {
+                        sqlCommand.Connection = sqlConnection;
+                        sqlCommand.CommandText = "DELETE FROM Employee WHERE Id=@Id";
+                        sqlCommand.Parameters.AddWithValue("Id", sectectedrow);
+                        sqlCommand.ExecuteNonQuery();
+                    }
+                    sqlConnection.Close();
+                }
+        }
     }
 }

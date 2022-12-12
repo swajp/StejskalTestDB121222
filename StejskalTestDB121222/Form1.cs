@@ -36,5 +36,12 @@ namespace StejskalTestDB121222
                 listView1.Items.Add(listViewItem);
             }
         }
+
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+            int selectedRow = listView1.FocusedItem.Index + 2;
+            sqlRepository.RemoveEmployees(selectedRow);
+            RefreshGUI();
+        }
     }
 }
