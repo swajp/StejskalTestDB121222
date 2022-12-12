@@ -36,6 +36,8 @@
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.buttonDelete = new System.Windows.Forms.Button();
+            this.buttonInsert = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listView1
@@ -83,19 +85,40 @@
             // 
             // buttonDelete
             // 
-            this.buttonDelete.Location = new System.Drawing.Point(544, 376);
+            this.buttonDelete.Location = new System.Drawing.Point(544, 50);
             this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(141, 23);
+            this.buttonDelete.Size = new System.Drawing.Size(141, 34);
             this.buttonDelete.TabIndex = 1;
-            this.buttonDelete.Text = "Vymazat vybraný řádek";
+            this.buttonDelete.Text = "Delete selected row";
             this.buttonDelete.UseVisualStyleBackColor = true;
             this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
+            // 
+            // buttonInsert
+            // 
+            this.buttonInsert.Location = new System.Drawing.Point(544, 12);
+            this.buttonInsert.Name = "buttonInsert";
+            this.buttonInsert.Size = new System.Drawing.Size(141, 32);
+            this.buttonInsert.TabIndex = 2;
+            this.buttonInsert.Text = "Add new data";
+            this.buttonInsert.UseVisualStyleBackColor = true;
+            this.buttonInsert.Click += new System.EventHandler(this.buttonInsert_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(541, 90);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(141, 32);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Edit selected row";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 413);
+            this.ClientSize = new System.Drawing.Size(694, 413);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.buttonInsert);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.listView1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -117,6 +140,8 @@
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ColumnHeader columnHeader6;
         private System.Windows.Forms.Button buttonDelete;
+        private System.Windows.Forms.Button buttonInsert;
+        private System.Windows.Forms.Button button1;
     }
 }
 

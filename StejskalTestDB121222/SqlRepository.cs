@@ -34,7 +34,7 @@ namespace StejskalTestDB121222
                                     Lastname = sqlDataReader["Lastname"].ToString(),
                                     Phone = sqlDataReader["Phone"].ToString(),
                                     Email = sqlDataReader["Email"].ToString(),
-                                    Birthday = Convert.ToDateTime(sqlDataReader["Birthday"])
+                                    //Birthday = Convert.ToDateTime(sqlDataReader["Birthday"])
                                 };
                                 employees.Add(employee);
                             }
@@ -49,7 +49,7 @@ namespace StejskalTestDB121222
             }
             return employees;
         }
-        public void RemoveEmployees(int sectectedrow)
+        public void RemoveEmployees(string idValue)
         {
                 using (SqlConnection sqlConnection = new SqlConnection(connectionString))
                 {
@@ -58,11 +58,30 @@ namespace StejskalTestDB121222
                     {
                         sqlCommand.Connection = sqlConnection;
                         sqlCommand.CommandText = "DELETE FROM Employee WHERE Id=@Id";
-                        sqlCommand.Parameters.AddWithValue("Id", sectectedrow);
+                        sqlCommand.Parameters.AddWithValue("Id", idValue);
                         sqlCommand.ExecuteNonQuery();
                     }
                     sqlConnection.Close();
                 }
+        }
+        public void AddEmployee(string firstname, string lastname, string phone, string email)
+        {
+            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+            {
+                sqlConnection.Open();
+                using (SqlCommand sqlCommand = new SqlCommand())
+                {
+                    sqlCommand.Connection = sqlConnection;
+                    sqlCommand.CommandText = "INSERT INTO Employee (Firstname, Lastname, Phone, Email, Birthday) VALUES (@firstname,@lastname,@phone,@email, NULL)";
+                    sqlCommand.Parameters.AddWithValue("@firstname", firstname);
+                    sqlCommand.Parameters.AddWithValue("@lastname", lastname);
+                    sqlCommand.Parameters.AddWithValue("@phone", phone);
+                    sqlCommand.Parameters.AddWithValue("@email", email);
+                    //sqlCommand.Parameters.AddWithValue("@birthday", birthday);
+                    sqlCommand.ExecuteNonQuery();
+                }
+                sqlConnection.Close();
+            }
         }
     }
 }

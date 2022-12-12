@@ -20,7 +20,7 @@ namespace StejskalTestDB121222
             employees = sqlRepository.GetEmployees();
             RefreshGUI();
         }
-        private void RefreshGUI()
+        public void RefreshGUI()
         {
             listView1.Items.Clear();
             foreach (Employee employee in employees)
@@ -34,13 +34,27 @@ namespace StejskalTestDB121222
                     employee.Birthday.ToString("dd.MM.yyyy")
                 });
                 listView1.Items.Add(listViewItem);
+                listView1.Refresh();
             }
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
-            int selectedRow = listView1.FocusedItem.Index + 2;
-            sqlRepository.RemoveEmployees(selectedRow);
+            var selectedRow = listView1.SelectedItems[0];
+            var idValue = selectedRow.SubItems[0].Text;
+            sqlRepository.RemoveEmployees(idValue);
+            listView1.SelectedItems[0].Remove();
+        }
+
+        private void buttonInsert_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            FormAdd formAdd = new FormAdd();
+            formAdd.Show();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
             RefreshGUI();
         }
     }
