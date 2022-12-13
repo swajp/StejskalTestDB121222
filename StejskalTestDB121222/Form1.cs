@@ -29,8 +29,8 @@ namespace StejskalTestDB121222
                     employee.Id.ToString(),
                     employee.Firstname.ToString(),
                     employee.Lastname.ToString(),
-                    employee.Phone.ToString(),
                     employee.Email.ToString(),
+                    employee.Phone.ToString(),
                     employee.Birthday.ToString("dd.MM.yyyy")
                 });
                 listView1.Items.Add(listViewItem);
@@ -40,10 +40,17 @@ namespace StejskalTestDB121222
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
-            var selectedRow = listView1.SelectedItems[0];
-            var idValue = selectedRow.SubItems[0].Text;
-            sqlRepository.RemoveEmployees(idValue);
-            listView1.SelectedItems[0].Remove();
+            if (listView1.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Row isn't selected");
+            }
+            else
+            {
+                var selectedRow = listView1.SelectedItems[0];
+                var idValue = selectedRow.SubItems[0].Text;
+                sqlRepository.RemoveEmployees(idValue);
+                listView1.SelectedItems[0].Remove();
+            }
         }
 
         private void buttonInsert_Click(object sender, EventArgs e)
@@ -53,9 +60,25 @@ namespace StejskalTestDB121222
             formAdd.Show();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void buttonEdit_Click(object sender, EventArgs e)
         {
-            RefreshGUI();
+            if (listView1.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Row isn't selected");
+            }
+            else
+            {
+                this.Hide();
+                FormEdit formEdit = new FormEdit();
+                formEdit.Show();
+                var selectedRow = listView1.SelectedItems[0];
+                var id = selectedRow.SubItems[0].Text;
+                var firstname = selectedRow.SubItems[1].Text;
+                var lastname = selectedRow.SubItems[2].Text;
+                var phone = selectedRow.SubItems[4].Text;
+                var email = selectedRow.SubItems[3].Text;
+                formEdit.GetData(id, firstname, lastname, phone, email);
+            }
         }
     }
 }

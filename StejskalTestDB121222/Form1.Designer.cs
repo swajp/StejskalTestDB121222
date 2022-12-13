@@ -37,7 +37,7 @@
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonInsert = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonEdit = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listView1
@@ -61,10 +61,12 @@
             // 
             // columnHeader1
             // 
+            this.columnHeader1.DisplayIndex = 0;
             this.columnHeader1.Text = "Id";
             // 
             // columnHeader2
             // 
+            this.columnHeader2.DisplayIndex = 1;
             this.columnHeader2.Text = "Firstname";
             // 
             // columnHeader3
@@ -103,21 +105,22 @@
             this.buttonInsert.UseVisualStyleBackColor = true;
             this.buttonInsert.Click += new System.EventHandler(this.buttonInsert_Click);
             // 
-            // button1
+            // buttonEdit
             // 
-            this.button1.Location = new System.Drawing.Point(541, 90);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(141, 32);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Edit selected row";
-            this.button1.UseVisualStyleBackColor = true;
+            this.buttonEdit.Location = new System.Drawing.Point(541, 90);
+            this.buttonEdit.Name = "buttonEdit";
+            this.buttonEdit.Size = new System.Drawing.Size(141, 32);
+            this.buttonEdit.TabIndex = 3;
+            this.buttonEdit.Text = "Edit selected row";
+            this.buttonEdit.UseVisualStyleBackColor = true;
+            this.buttonEdit.Click += new System.EventHandler(this.buttonEdit_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(694, 413);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.buttonEdit);
             this.Controls.Add(this.buttonInsert);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.listView1);
@@ -141,7 +144,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader6;
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Button buttonInsert;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonEdit;
     }
 }
 

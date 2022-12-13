@@ -51,6 +51,8 @@ namespace StejskalTestDB121222
         }
         public void RemoveEmployees(string idValue)
         {
+            try
+            {
                 using (SqlConnection sqlConnection = new SqlConnection(connectionString))
                 {
                     sqlConnection.Open();
@@ -63,24 +65,63 @@ namespace StejskalTestDB121222
                     }
                     sqlConnection.Close();
                 }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Some error happend (Exception: {ex.Message})");
+            }
         }
         public void AddEmployee(string firstname, string lastname, string phone, string email)
         {
-            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+            try
             {
-                sqlConnection.Open();
-                using (SqlCommand sqlCommand = new SqlCommand())
+                using (SqlConnection sqlConnection = new SqlConnection(connectionString))
                 {
-                    sqlCommand.Connection = sqlConnection;
-                    sqlCommand.CommandText = "INSERT INTO Employee (Firstname, Lastname, Phone, Email, Birthday) VALUES (@firstname,@lastname,@phone,@email, NULL)";
-                    sqlCommand.Parameters.AddWithValue("@firstname", firstname);
-                    sqlCommand.Parameters.AddWithValue("@lastname", lastname);
-                    sqlCommand.Parameters.AddWithValue("@phone", phone);
-                    sqlCommand.Parameters.AddWithValue("@email", email);
-                    //sqlCommand.Parameters.AddWithValue("@birthday", birthday);
-                    sqlCommand.ExecuteNonQuery();
+                    sqlConnection.Open();
+                    using (SqlCommand sqlCommand = new SqlCommand())
+                    {
+                        sqlCommand.Connection = sqlConnection;
+                        sqlCommand.CommandText = "INSERT INTO Employee (Firstname, Lastname, Phone, Email, Birthday) VALUES (@firstname,@lastname,@phone,@email, NULL)";
+                        sqlCommand.Parameters.AddWithValue("@firstname", firstname);
+                        sqlCommand.Parameters.AddWithValue("@lastname", lastname);
+                        sqlCommand.Parameters.AddWithValue("@phone", phone);
+                        sqlCommand.Parameters.AddWithValue("@email", email);
+                        //sqlCommand.Parameters.AddWithValue("@birthday", birthday);
+                        sqlCommand.ExecuteNonQuery();
+                    }
+                    sqlConnection.Close();
                 }
-                sqlConnection.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Some error happend (Exception: {ex.Message})");
+            }
+        }
+        public void EditEmployee(int id, string firstname, string lastname, string phone, string email)
+        {
+            try
+            {
+                using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+                {
+                    sqlConnection.Open();
+                    using (SqlCommand sqlCommand = new SqlCommand())
+                    {
+                        sqlCommand.Connection = sqlConnection;
+                        sqlCommand.CommandText = "UPDATE Employee SET Firstname=@firtname, Lastname=@lastname, Phone=@phone, Email=@email, Birthday=NULL WHERE  Id=@id ";
+                        sqlCommand.Parameters.AddWithValue("@id", id);
+                        sqlCommand.Parameters.AddWithValue("@firstname", firstname);
+                        sqlCommand.Parameters.AddWithValue("@lastname", lastname);
+                        sqlCommand.Parameters.AddWithValue("@phone", phone);
+                        sqlCommand.Parameters.AddWithValue("@email", email);
+                        //sqlCommand.Parameters.AddWithValue("@birthday", birthday);
+                        sqlCommand.ExecuteNonQuery();
+                    }
+                    sqlConnection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Some error happend (Exception: {ex.Message})");
             }
         }
     }
