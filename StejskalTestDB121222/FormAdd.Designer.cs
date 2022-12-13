@@ -58,7 +58,7 @@
             this.buttonInsertData.Name = "buttonInsertData";
             this.buttonInsertData.Size = new System.Drawing.Size(83, 32);
             this.buttonInsertData.TabIndex = 1;
-            this.buttonInsertData.Text = "Vložit";
+            this.buttonInsertData.Text = "Add";
             this.buttonInsertData.UseVisualStyleBackColor = true;
             this.buttonInsertData.Click += new System.EventHandler(this.buttonInsertData_Click);
             // 
@@ -68,7 +68,7 @@
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(83, 32);
             this.buttonClose.TabIndex = 2;
-            this.buttonClose.Text = "Zavřít";
+            this.buttonClose.Text = "Close";
             this.buttonClose.UseVisualStyleBackColor = true;
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 

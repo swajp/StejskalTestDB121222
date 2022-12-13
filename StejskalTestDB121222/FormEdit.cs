@@ -21,7 +21,8 @@ namespace StejskalTestDB121222
         }
         public void GetData(string id,string firstname, string lastname,string phone, string email)
         {
-            labelId.Text = "ID:" + id;
+            labelId.Text = id;
+            string usedId = id;
             inputFirstname.Text = firstname;
             inputLastname.Text = lastname;
             inputPhone.Text = phone;
@@ -29,7 +30,7 @@ namespace StejskalTestDB121222
         }
         private void buttonEditData_Click(object sender, EventArgs e)
         {
-            sqlRepository.AddEmployee(inputFirstname.Text, inputLastname.Text, inputPhone.Text, inputEmail.Text);
+            sqlRepository.EditEmployee(labelId.Text,inputFirstname.Text, inputLastname.Text, inputPhone.Text, inputEmail.Text);
             this.Close();
             Form1 form1 = new Form1();
             form1.Show();

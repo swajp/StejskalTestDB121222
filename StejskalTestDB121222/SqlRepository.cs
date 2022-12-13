@@ -97,7 +97,7 @@ namespace StejskalTestDB121222
                 throw new Exception($"Some error happend (Exception: {ex.Message})");
             }
         }
-        public void EditEmployee(int id, string firstname, string lastname, string phone, string email)
+        public void EditEmployee(string id, string firstname, string lastname, string phone, string email)
         {
             try
             {
@@ -107,7 +107,7 @@ namespace StejskalTestDB121222
                     using (SqlCommand sqlCommand = new SqlCommand())
                     {
                         sqlCommand.Connection = sqlConnection;
-                        sqlCommand.CommandText = "UPDATE Employee SET Firstname=@firtname, Lastname=@lastname, Phone=@phone, Email=@email, Birthday=NULL WHERE  Id=@id ";
+                        sqlCommand.CommandText = "UPDATE Employee SET Firstname=@firstname, Lastname=@lastname, Phone=@phone, Email=@email, Birthday=NULL WHERE  Id=@id ";
                         sqlCommand.Parameters.AddWithValue("@id", id);
                         sqlCommand.Parameters.AddWithValue("@firstname", firstname);
                         sqlCommand.Parameters.AddWithValue("@lastname", lastname);
