@@ -48,7 +48,7 @@ namespace StejskalTestDB121222
             {
                 var selectedRow = listView1.SelectedItems[0];
                 var idValue = selectedRow.SubItems[0].Text;
-                sqlRepository.RemoveEmployees(idValue);
+                sqlRepository.DeleteEmployees(idValue);
                 listView1.SelectedItems[0].Remove();
             }
         }
@@ -79,6 +79,26 @@ namespace StejskalTestDB121222
                 var email = selectedRow.SubItems[3].Text;
                 formEdit.GetData(id, firstname, lastname, phone, email);
             }
+        }
+
+        private void buttonCount_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Current number of employees is: " + sqlRepository.GetCount());
+        }
+
+        private void buttonAverage_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonMaximum_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonMinimum_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

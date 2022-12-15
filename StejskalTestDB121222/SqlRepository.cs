@@ -22,7 +22,7 @@ namespace StejskalTestDB121222
                     using (SqlCommand sqlCommand = new SqlCommand())
                     {
                         sqlCommand.Connection = sqlConnection;
-                        sqlCommand.CommandText = "select * from Employee";
+                        sqlCommand.CommandText = "SELECT * FROM Employee";
                         using (SqlDataReader sqlDataReader = sqlCommand.ExecuteReader())
                         {
                             while (sqlDataReader.Read())
@@ -49,7 +49,7 @@ namespace StejskalTestDB121222
             }
             return employees;
         }
-        public void RemoveEmployees(string idValue)
+        public void DeleteEmployees(string idValue)
         {
             try
             {
@@ -59,8 +59,7 @@ namespace StejskalTestDB121222
                     using (SqlCommand sqlCommand = new SqlCommand())
                     {
                         sqlCommand.Connection = sqlConnection;
-                        sqlCommand.CommandText = "DELETE FROM Employee WHERE Id=@Id";
-                        sqlCommand.Parameters.AddWithValue("Id", idValue);
+                        sqlCommand.CommandText = $"DELETE FROM Employee WHERE Id={idValue}";
                         sqlCommand.ExecuteNonQuery();
                     }
                     sqlConnection.Close();
@@ -81,7 +80,7 @@ namespace StejskalTestDB121222
                     using (SqlCommand sqlCommand = new SqlCommand())
                     {
                         sqlCommand.Connection = sqlConnection;
-                        sqlCommand.CommandText = "INSERT INTO Employee (Firstname, Lastname, Phone, Email, Birthday) VALUES (@firstname,@lastname,@phone,@email, NULL)";
+                        sqlCommand.CommandText = $"INSERT INTO Employee (Firstname, Lastname, Phone, Email, Birthday) VALUES (@firstname,@lastname,@phone,@email, NULL)";
                         sqlCommand.Parameters.AddWithValue("@firstname", firstname);
                         sqlCommand.Parameters.AddWithValue("@lastname", lastname);
                         sqlCommand.Parameters.AddWithValue("@phone", phone);
@@ -117,6 +116,29 @@ namespace StejskalTestDB121222
                         sqlCommand.ExecuteNonQuery();
                     }
                     sqlConnection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Some error happend (Exception: {ex.Message})");
+            }                    
+        }
+        public int GetCount()
+        {
+            try
+            {
+                using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+                {
+                    sqlConnection.Open();
+                    using (SqlCommand sqlCommand = new SqlCommand())
+                    {
+                        sqlCommand.Connection = sqlConnection;
+                        sqlCommand.CommandText = "SELECT COUNT(*) FROM Employee";
+                        int rowCount = (int)sqlCommand.ExecuteScalar();   
+                        sqlConnection.Close();
+                        return rowCount;
+                    }
+                 
                 }
             }
             catch (Exception ex)
