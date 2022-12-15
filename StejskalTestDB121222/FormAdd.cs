@@ -20,7 +20,7 @@ namespace StejskalTestDB121222
 
         private void buttonInsertData_Click(object sender, EventArgs e)
         {
-            sqlRepository.AddEmployee(inputFirstname.Text,inputLastname.Text, inputPhone.Text, inputEmail.Text);
+            sqlRepository.AddEmployee(inputFirstname.Text,inputLastname.Text, inputPhone.Text, inputEmail.Text, inputBirtday.Value);
             this.Close();
             Form1 form1 = new Form1();
             form1.Show();

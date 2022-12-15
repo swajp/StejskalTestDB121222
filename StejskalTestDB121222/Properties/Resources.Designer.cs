@@ -59,25 +59,5 @@ namespace StejskalTestDB121222.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap ic_round_delete {
-            get {
-                object obj = ResourceManager.GetObject("ic_round-delete", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap play_button {
-            get {
-                object obj = ResourceManager.GetObject("play-button", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
     }
 }

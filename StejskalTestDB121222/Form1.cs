@@ -77,7 +77,8 @@ namespace StejskalTestDB121222
                 var lastname = selectedRow.SubItems[2].Text;
                 var phone = selectedRow.SubItems[4].Text;
                 var email = selectedRow.SubItems[3].Text;
-                formEdit.GetData(id, firstname, lastname, phone, email);
+                var birthday = selectedRow.SubItems[5].Text;
+                formEdit.GetData(id, firstname, lastname, phone, email, Convert.ToDateTime(birthday));
             }
         }
 
@@ -88,17 +89,17 @@ namespace StejskalTestDB121222
 
         private void buttonAverage_Click(object sender, EventArgs e)
         {
-
+            MessageBox.Show("Average year of employess is: " + sqlRepository.GetAverage());
         }
 
         private void buttonMaximum_Click(object sender, EventArgs e)
         {
-
+            MessageBox.Show("The lowest age of employees is: " + sqlRepository.GetMax());
         }
 
         private void buttonMinimum_Click(object sender, EventArgs e)
         {
-
+            MessageBox.Show("The highest age of employees is: " + sqlRepository.GetMin());
         }
     }
 }

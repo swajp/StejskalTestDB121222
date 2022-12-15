@@ -34,7 +34,7 @@ namespace StejskalTestDB121222
                                     Lastname = sqlDataReader["Lastname"].ToString(),
                                     Phone = sqlDataReader["Phone"].ToString(),
                                     Email = sqlDataReader["Email"].ToString(),
-                                    //Birthday = Convert.ToDateTime(sqlDataReader["Birthday"])
+                                    Birthday = Convert.ToDateTime(sqlDataReader["Birthday"])
                                 };
                                 employees.Add(employee);
                             }
@@ -70,7 +70,7 @@ namespace StejskalTestDB121222
                 throw new Exception($"Some error happend (Exception: {ex.Message})");
             }
         }
-        public void AddEmployee(string firstname, string lastname, string phone, string email)
+        public void AddEmployee(string firstname, string lastname, string phone, string email, DateTime birthday)
         {
             try
             {
@@ -80,12 +80,12 @@ namespace StejskalTestDB121222
                     using (SqlCommand sqlCommand = new SqlCommand())
                     {
                         sqlCommand.Connection = sqlConnection;
-                        sqlCommand.CommandText = $"INSERT INTO Employee (Firstname, Lastname, Phone, Email, Birthday) VALUES (@firstname,@lastname,@phone,@email, NULL)";
+                        sqlCommand.CommandText = $"INSERT INTO Employee (Firstname, Lastname, Phone, Email, Birthday) VALUES (@firstname,@lastname,@phone,@email, @birthday)";
                         sqlCommand.Parameters.AddWithValue("@firstname", firstname);
                         sqlCommand.Parameters.AddWithValue("@lastname", lastname);
                         sqlCommand.Parameters.AddWithValue("@phone", phone);
                         sqlCommand.Parameters.AddWithValue("@email", email);
-                        //sqlCommand.Parameters.AddWithValue("@birthday", birthday);
+                        sqlCommand.Parameters.AddWithValue("@birthday", birthday);
                         sqlCommand.ExecuteNonQuery();
                     }
                     sqlConnection.Close();
@@ -96,7 +96,7 @@ namespace StejskalTestDB121222
                 throw new Exception($"Some error happend (Exception: {ex.Message})");
             }
         }
-        public void EditEmployee(string id, string firstname, string lastname, string phone, string email)
+        public void EditEmployee(string id, string firstname, string lastname, string phone, string email, DateTime birthday)
         {
             try
             {
@@ -106,13 +106,13 @@ namespace StejskalTestDB121222
                     using (SqlCommand sqlCommand = new SqlCommand())
                     {
                         sqlCommand.Connection = sqlConnection;
-                        sqlCommand.CommandText = "UPDATE Employee SET Firstname=@firstname, Lastname=@lastname, Phone=@phone, Email=@email, Birthday=NULL WHERE  Id=@id ";
+                        sqlCommand.CommandText = "UPDATE Employee SET Firstname=@firstname, Lastname=@lastname, Phone=@phone, Email=@email, Birthday=@birthday WHERE  Id=@id ";
                         sqlCommand.Parameters.AddWithValue("@id", id);
                         sqlCommand.Parameters.AddWithValue("@firstname", firstname);
                         sqlCommand.Parameters.AddWithValue("@lastname", lastname);
                         sqlCommand.Parameters.AddWithValue("@phone", phone);
                         sqlCommand.Parameters.AddWithValue("@email", email);
-                        //sqlCommand.Parameters.AddWithValue("@birthday", birthday);
+                        sqlCommand.Parameters.AddWithValue("@birthday", birthday);
                         sqlCommand.ExecuteNonQuery();
                     }
                     sqlConnection.Close();
@@ -139,6 +139,79 @@ namespace StejskalTestDB121222
                         return rowCount;
                     }
                  
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Some error happend (Exception: {ex.Message})");
+            }
+        }
+        public int GetAverage()
+        {
+            try
+            {
+                using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+                {
+                    sqlConnection.Open();
+                    using (SqlCommand sqlCommand = new SqlCommand())
+                    {
+                        sqlCommand.Connection = sqlConnection;
+                        sqlCommand.CommandText = "SELECT AVG(DATEDIFF(YEAR, Birthday, CURRENT_TIMESTAMP)) FROM Employee";
+                        int avgAge = (int)sqlCommand.ExecuteScalar();
+                        sqlConnection.Close();
+                        return avgAge;
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Some error happend (Exception: {ex.Message})");
+            }
+        }
+        public int GetMax()
+        {
+            try
+            {
+                using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+                {
+                    sqlConnection.Open();
+                    using (SqlCommand sqlCommand = new SqlCommand())
+                    {
+                        sqlCommand.Connection = sqlConnection;
+                        sqlCommand.CommandText = "SELECT MAX(Birthday) FROM Employee";
+                        DateTime getAge = Convert.ToDateTime(sqlCommand.ExecuteScalar());
+                        int maxAge = DateTime.Now.Year - getAge.Year;
+
+                        sqlConnection.Close();
+                        return maxAge;
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Some error happend (Exception: {ex.Message})");
+            }
+        }
+        public int GetMin()
+        {
+            try
+            {
+                using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+                {
+                    sqlConnection.Open();
+                    using (SqlCommand sqlCommand = new SqlCommand())
+                    {
+                        sqlCommand.Connection = sqlConnection;
+                        sqlCommand.CommandText = "SELECT MIN(Birthday) FROM Employee";
+                        DateTime getAge = Convert.ToDateTime(sqlCommand.ExecuteScalar());
+                        int maxAge = DateTime.Now.Year - getAge.Year;
+
+                        sqlConnection.Close();
+                        return maxAge;
+                    }
+
                 }
             }
             catch (Exception ex)
